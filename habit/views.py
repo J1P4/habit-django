@@ -22,7 +22,7 @@ def recommend_food(request):
 
         # Serialize the recommended foods (if necessary)
         # Here, you might want to convert the DataFrame to a JSON object
-        serialized_data = recommended_foods
+        serialized_data = {"foodlist": recommended_foods}
 
         # Return the serialized data as an HTTP response
         return JsonResponse(serialized_data, safe=False)
