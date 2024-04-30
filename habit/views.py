@@ -19,12 +19,8 @@ def recommend_food(request):
         
         # Call the method from your integrated script
         recommended_foods = food_recommendation.run_food_recommandation(input_food_list,food_recommendation)
-
-        # Serialize the recommended foods (if necessary)
-        # Here, you might want to convert the DataFrame to a JSON object
-        serialized_data = recommended_foods
-
+        
         # Return the serialized data as an HTTP response
-        return JsonResponse(serialized_data, safe=False)
+        return JsonResponse({"foodlist": recommended_foods}, safe=False)
     else:
         return JsonResponse({'error': 'Only POST requests are allowed.'}, status=405)
