@@ -17,9 +17,6 @@ class food_recommendation():
   # PATH_NAME2 = 'C:/Users/gkstk/OneDrive/Desktop/SangMin/Github/AI/'
   # 서버 실행시 한번만 로드 할 수 있도록 할 것
   model = KeyedVectors.load(PATH_NAME + "한국어_음식모델_한상민.kv", mmap='r')
-  
-  with open(PATH_NAME + 'wweia_synonym_cats.pickle', 'rb') as handle:
-    wweia_synonym_cats = pickle.load(handle)
     
   wweia_food_categories = pd.read_csv(PATH_NAME + 'wweia_food_categories_addtl.csv')
   
