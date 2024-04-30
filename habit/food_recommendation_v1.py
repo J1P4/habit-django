@@ -89,5 +89,16 @@ class food_recommendation():
     last_list = first_list + second_list
     last_list = list(set(last_list))
     # print(last_list)
-    return last_list
+    
+    category_info_list = []
+    for category_num in last_list:
+        category_row = self.wweia_food_categories[self.wweia_food_categories['NO'] == category_num].iloc[0]
+        category_dict = {
+            "foodId": int(category_row['NO']),
+            "name": category_row['식품명'],
+            "category": category_row['식품상세분류']
+        }
+        category_info_list.append(category_dict)
+    
+    return category_info_list
 
