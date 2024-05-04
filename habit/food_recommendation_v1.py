@@ -92,11 +92,16 @@ class food_recommendation():
     
     category_info_list = []
     for category_num in last_list:
-        category_row = self.wweia_food_categories[self.wweia_food_categories['NO'] == category_num].iloc[0]
+        category_row = self.wweia_data[self.wweia_data['NO'] == category_num].iloc[0]
         category_dict = {
             "foodId": int(category_row['NO']),
             "name": category_row['식품명'],
-            "category": category_row['식품상세분류']
+            "category": category_row['식품상세분류'],
+            "moisture": category_row['수분(g)'],
+            "carbohydrate": category_row['탄수화물(g)'],
+            "protein": category_row['단백질(g)'],
+            "fat": category_row['지방(g)'],
+            "kcal": category_row['에너지(㎉)']
         }
         category_info_list.append(category_dict)
     
