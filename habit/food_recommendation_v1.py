@@ -12,15 +12,17 @@ import os
 class food_recommendation():
   PATH_NAME = os.path.dirname(os.path.abspath(__file__))+ '/'
   
-  # PATH_NAME2 = 'C:/Users/woobi/Documents/habit-AI/'
+  PATH_NAME = 'C:/Users/woobi/Documents/habit/habit-django/habit/'
   # PATH_NAME = 'C:/Users/gkstk/OneDrive/Desktop/SangMin/Github/AI/data/'
   # PATH_NAME2 = 'C:/Users/gkstk/OneDrive/Desktop/SangMin/Github/AI/'
   # 서버 실행시 한번만 로드 할 수 있도록 할 것
-  model = KeyedVectors.load(PATH_NAME + "한국어_음식모델_한상민.kv", mmap='r')
-    
-  wweia_food_categories = pd.read_csv(PATH_NAME + 'wweia_food_categories_addtl.csv')
+  model = KeyedVectors.load(PATH_NAME + "한국어_음식모델_한상민_v2.kv", mmap='r')
   
-  wweia_data = pd.read_csv(PATH_NAME + 'wweia_data.csv')
+  food_data = pd.read_csv(PATH_NAME + 'foods.csv')
+  
+  #wweia_food_categories = pd.read_csv(PATH_NAME + 'wweia_food_categories_addtl.csv')
+  
+  #wweia_data = pd.read_csv(PATH_NAME + 'wweia_data.csv')
   
   wweia_embeddings = pd.read_csv(PATH_NAME + 'word_embeddings.csv', delimiter = ",")
   
@@ -64,9 +66,9 @@ class food_recommendation():
       to_keep_args = np.argsort(similarities, axis=1)
       indices = np.flip(to_keep_args, axis = 1)
 
-      most_sim_food_row = self.wweia_data.iloc[indices[0,0], :]
-      highest_cat_num = most_sim_food_row['NO']
-      highest_cat_words = self.wweia_food_categories.loc[self.wweia_food_categories['NO'] == highest_cat_num, '식품명']
+      most_sim_food_row = self.food_data.iloc[indices[0,0], :]
+      highest_cat_num = most_sim_food_row['id']
+      highest_cat_words = self.food_data.loc[self.food_data['id'] == highest_cat_num, 'name']
       curr_log.loc[i, 'predicted_categories_number'] = highest_cat_num
       curr_log.loc[i, 'predicted_categories_words'] = highest_cat_words.to_list()[0]
 
@@ -92,16 +94,16 @@ class food_recommendation():
     
     category_info_list = []
     for category_num in last_list:
-        category_row = self.wweia_data[self.wweia_data['NO'] == category_num].iloc[0]
+        category_row = self.food_data[self.food_data['id'] == category_num].iloc[0]
         category_dict = {
-            "foodId": int(category_row['NO']),
-            "name": category_row['식품명'],
-            "category": category_row['식품상세분류'],
-            "moisture": category_row['수분(g)'],
-            "carbohydrate": category_row['탄수화물(g)'],
-            "protein": category_row['단백질(g)'],
-            "fat": category_row['지방(g)'],
-            "kcal": category_row['에너지(㎉)']
+            "foodId": int(category_row['id']),
+            "name": category_row['name'],
+            "category": category_row['detail_classification'],
+            "moisture": category_row['moisture'],
+            "carbohydrate": category_row['carbohydrate'],
+            "protein": category_row['protein'],
+            "fat": category_row['fat'],
+            "kcal": category_row['energy']
         }
         category_info_list.append(category_dict)
     
