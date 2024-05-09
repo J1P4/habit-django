@@ -12,7 +12,7 @@ import os
 class food_recommendation():
   PATH_NAME = os.path.dirname(os.path.abspath(__file__))+ '/'
   
-  PATH_NAME = 'C:/Users/woobi/Documents/habit/habit-django/habit/'
+  #PATH_NAME = 'C:/Users/woobi/Documents/habit/habit-django/habit/'
   # PATH_NAME = 'C:/Users/gkstk/OneDrive/Desktop/SangMin/Github/AI/data/'
   # PATH_NAME2 = 'C:/Users/gkstk/OneDrive/Desktop/SangMin/Github/AI/'
   # 서버 실행시 한번만 로드 할 수 있도록 할 것
