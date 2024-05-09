@@ -20,10 +20,6 @@ class food_recommendation():
   
   food_data = pd.read_csv(PATH_NAME + 'foods.csv')
   
-  #wweia_food_categories = pd.read_csv(PATH_NAME + 'wweia_food_categories_addtl.csv')
-  
-  #wweia_data = pd.read_csv(PATH_NAME + 'wweia_data.csv')
-  
   wweia_embeddings = pd.read_csv(PATH_NAME + 'word_embeddings.csv', delimiter = ",")
   
   stop_words = ['가', '걍', '것', '고', '과', '는', '도', '들', '등', '때', '로', '를', '뿐', '수', '아니', '않', '없', '에', '에게', '와', '으로', '은', '의', '이', '이다', '있', '자', '잘', '좀', '하다', '한', '조각', '개', '것', '대', '소' ,'단계', '등급', '포함', '미니', '개입']
